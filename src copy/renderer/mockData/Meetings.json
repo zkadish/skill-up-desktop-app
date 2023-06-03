@@ -1,0 +1,194 @@
+// TODO: make sure this is no longer of any use then delete this file
+{
+  "days": [
+    {
+      "date": "Tuesday, March 4",
+      "meetings": [
+        {
+          "id": 0,
+          "title": "Discover Org & Cues.ai - Demo",
+          "time": "12:00pm",
+          "date": "Tuesday, March 4",
+          "notifications": 3,
+          "companyName": "Discover Financial",
+          "companyId": 0,
+          "attending": [
+            {
+              "name": "John Doe",
+              "email": "john.doe@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "yes"
+            },
+            {
+              "name": "Mary Smith",
+              "email": "mary.smith@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "yes"
+            },
+            {
+              "name": "Milton Edwards",
+              "email": "milton.edwards@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            }
+          ]
+        },
+        {
+          "title": "Hub Spot & Cues.ai - Discovery call",
+          "id": 1,
+          "time": "1:00pm",
+          "date": "Tuesday, March 4",
+          "notifications": 1,
+          "companyName": "Hub Spot Inc",
+          "companyId": 1,
+          "attending": [
+            {
+              "name": "John Doe",
+              "email": "john.doe@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "maybe"
+            },
+            {
+              "name": "Mary Smith",
+              "email": "mary.smith@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            },
+            {
+              "name": "Milton Edwards",
+              "email": "milton.edwards@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "yes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "Wednesday, March 5",
+      "meetings": [
+        {
+          "title": "Sails Force & Cues.ai - Discovery call",
+          "id": 2,
+          "time": "10:30am",
+          "date": "Wednesday, March 5",
+          "notifications": 0,
+          "companyName": "Sails Force Inc",
+          "companyId": 2,
+          "attending": [
+            {
+              "name": "John Doe",
+              "email": "john.doe@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "yes"
+            },
+            {
+              "name": "Mary Smith",
+              "email": "mary.smith@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            },
+            {
+              "name": "Milton Edwards",
+              "email": "milton.edwards@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "maybe"
+            }
+          ]
+        },
+        {
+          "title": "SalesIQ & Cues.ai - Demo",
+          "id": 3,
+          "time": "11:30am",
+          "date": "Wednesday, March 5",
+          "notifications": 0,
+          "companyName": "SailsIQ Inc",
+          "companyId": 3,
+          "attending": [
+            {
+              "name": "John Doe",
+              "email": "john.doe@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "maybe"
+            },
+            {
+              "name": "Mary Smith",
+              "email": "mary.smith@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            },
+            {
+              "name": "Milton Edwards",
+              "email": "milton.edwards@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "Thursday, March 6",
+      "meetings": [
+        {
+          "title": "ACME & Cues.ai - Discovery call",
+          "id": 4,
+          "time": "2:00pm",
+          "date": "Wednesday, March 6",
+          "notifications": 5,
+          "companyName": "ACME",
+          "companyId": 4,
+          "attending": [
+            {
+              "name": "Jane Doe",
+              "email": "john.doe@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            },
+            {
+              "name": "Zoe Smith",
+              "email": "mary.smith@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            },
+            {
+              "name": "Charles Edwards",
+              "email": "milton.edwards@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            }
+          ]
+        },
+        {
+          "title": "Travelers Inc & Cues.ai - Intro",
+          "id": 5,
+          "time": "3:30pm",
+          "date": "Wednesday, March 6",
+          "notifications": 0,
+          "companyName": "Travelers Inc",
+          "companyId": 5,
+          "attending": [
+            {
+              "name": "Mark Richardson",
+              "email": "john.doe@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "yes"
+            },
+            {
+              "name": "Mary Smith",
+              "email": "mary.smith@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "yes"
+            },
+            {
+              "name": "Milton Edwards",
+              "email": "milton.edwards@discoverorg.com",
+              "mobile": 43576807609,
+              "rsvp": "no"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

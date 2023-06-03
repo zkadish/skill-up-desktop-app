@@ -1,0 +1,21 @@
+@import '../../../styles/variables.module.scss';
+
+.inactive {
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inactiveArrow {
+  margin-right: 8px;
+  margin-left: 8px;
+}
