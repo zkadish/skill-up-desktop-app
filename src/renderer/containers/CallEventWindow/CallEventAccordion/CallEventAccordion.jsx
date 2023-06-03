@@ -29,7 +29,7 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 import classes from './CallEventAccordion.styles';
 
-const CallEventAccordion = (props) => {
+function CallEventAccordion(props) {
   const { callEvent, removeCallEventWindowAttendee, updateWinElement } = props;
 
   const [expanded, setExpanded] = useState({});
@@ -122,7 +122,7 @@ const CallEventAccordion = (props) => {
   const onAddActionHandler = (blockId) => {
     // TODO: action name can't be identical, add validation
     setActionLabel('');
-    window.electron.ipcRenderer.sendMessage('update-main-window', {
+    window.electron.ipcRenderer.sendMessage('update-main-win', {
       winEvent: 'update-actions',
       eventId: callEvent.id,
       blockId,
@@ -149,7 +149,7 @@ const CallEventAccordion = (props) => {
     const num = noteNum + 1;
     setNoteValue('');
 
-    window.electron.ipcRenderer.sendMessage('update-main-window', {
+    window.electron.ipcRenderer.sendMessage('update-main-win', {
       winEvent: 'update-notes',
       eventId: callEvent.id,
       blockId,
@@ -188,7 +188,7 @@ const CallEventAccordion = (props) => {
       value,
     });
 
-    window.electron.ipcRenderer.sendMessage('update-main-window', {
+    window.electron.ipcRenderer.sendMessage('update-main-win', {
       winEvent: 'update-elements',
       eventId: callEvent.id,
       blockId,
@@ -216,7 +216,7 @@ const CallEventAccordion = (props) => {
       value,
     });
 
-    window.electron.ipcRenderer.sendMessage('update-main-window', {
+    window.electron.ipcRenderer.sendMessage('update-main-win', {
       winEvent: 'update-elements',
       eventId: callEvent.id,
       blockId,
@@ -240,7 +240,7 @@ const CallEventAccordion = (props) => {
       value: checked,
     });
 
-    window.electron.ipcRenderer.sendMessage('update-main-window', {
+    window.electron.ipcRenderer.sendMessage('update-main-win', {
       winEvent: 'update-elements',
       eventId: callEvent.id,
       blockId,
@@ -273,7 +273,7 @@ const CallEventAccordion = (props) => {
   // REMOVE ATTENDEE
   const onDeleteAttendee = (blockId, attendee) => () => {
     removeCallEventWindowAttendee({ blockId, attendee });
-    window.electron.ipcRenderer.sendMessage('update-main-window', {
+    window.electron.ipcRenderer.sendMessage('update-main-win', {
       winEvent: 'remove-attendee',
       eventId: callEvent.id,
       blockId,
@@ -573,7 +573,7 @@ const CallEventAccordion = (props) => {
       })}
     </Box>
   );
-};
+}
 
 CallEventAccordion.propTypes = {
   callEvent: object, // eslint-disable-line

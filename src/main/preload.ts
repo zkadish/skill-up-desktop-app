@@ -44,7 +44,7 @@ export type Channels =
   | 'open-call-event-win'
   | 'init-call-event-win'
   | 'create-account'
-  | 'update-main-window';
+  | 'update-main-win';
 
 const electronHandler = {
   ipcRenderer: {
