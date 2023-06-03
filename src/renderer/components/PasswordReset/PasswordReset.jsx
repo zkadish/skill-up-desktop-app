@@ -42,7 +42,7 @@ const ForgotPassword = (props) => {
       // TODO: open a modal explaining that a browser has been opened for you to create an account on the website
       console.log(arg);
     });
-    window.electron.ipcRenderer.createAccount();
+    window.electron.ipcRenderer.sendMessage('create-account');
   };
 
   return (

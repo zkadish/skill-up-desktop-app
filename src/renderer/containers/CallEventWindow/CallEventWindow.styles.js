@@ -8,7 +8,7 @@ const classes = {
     width: '100%',
     height: '22px',
     boxSizing: 'border-box',
-    '-webkit-app-region': 'drag',
+    webkitAppRegion: 'drag',
     backgroundColor: `${colors.BACKGROUND_PRIMARY}`,
     fontSize: '14px',
     color: 'rgba(0, 0, 0, 0.5)',

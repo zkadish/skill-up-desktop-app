@@ -42,7 +42,9 @@ export type Channels =
   | 'update-template'
   | 'delete-template'
   | 'open-call-event-win'
-  | 'init-call-event-win';
+  | 'init-call-event-win'
+  | 'create-account'
+  | 'update-main-window';
 
 const electronHandler = {
   ipcRenderer: {

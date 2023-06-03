@@ -122,7 +122,7 @@ const CallEventAccordion = (props) => {
   const onAddActionHandler = (blockId) => {
     // TODO: action name can't be identical, add validation
     setActionLabel('');
-    window.electron.ipcRenderer.updateMainWindow({
+    window.electron.ipcRenderer.sendMessage('update-main-window', {
       winEvent: 'update-actions',
       eventId: callEvent.id,
       blockId,
@@ -149,7 +149,7 @@ const CallEventAccordion = (props) => {
     const num = noteNum + 1;
     setNoteValue('');
 
-    window.electron.ipcRenderer.updateMainWindow({
+    window.electron.ipcRenderer.sendMessage('update-main-window', {
       winEvent: 'update-notes',
       eventId: callEvent.id,
       blockId,
@@ -188,7 +188,7 @@ const CallEventAccordion = (props) => {
       value,
     });
 
-    window.electron.ipcRenderer.updateMainWindow({
+    window.electron.ipcRenderer.sendMessage('update-main-window', {
       winEvent: 'update-elements',
       eventId: callEvent.id,
       blockId,
@@ -216,7 +216,7 @@ const CallEventAccordion = (props) => {
       value,
     });
 
-    window.electron.ipcRenderer.updateMainWindow({
+    window.electron.ipcRenderer.sendMessage('update-main-window', {
       winEvent: 'update-elements',
       eventId: callEvent.id,
       blockId,
@@ -240,7 +240,7 @@ const CallEventAccordion = (props) => {
       value: checked,
     });
 
-    window.electron.ipcRenderer.updateMainWindow({
+    window.electron.ipcRenderer.sendMessage('update-main-window', {
       winEvent: 'update-elements',
       eventId: callEvent.id,
       blockId,
@@ -273,7 +273,7 @@ const CallEventAccordion = (props) => {
   // REMOVE ATTENDEE
   const onDeleteAttendee = (blockId, attendee) => () => {
     removeCallEventWindowAttendee({ blockId, attendee });
-    window.electron.ipcRenderer.updateMainWindow({
+    window.electron.ipcRenderer.sendMessage('update-main-window', {
       winEvent: 'remove-attendee',
       eventId: callEvent.id,
       blockId,
