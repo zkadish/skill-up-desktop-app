@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
 // import { configureStore } from '@reduxjs/toolkit';
 import auth from './auth';
 import userAccount from './userAccount';
@@ -16,9 +15,8 @@ import frameworksSliceReducer from '../containers/Frameworks/reduxSlice/framewor
 //   },
 // });
 
-export default function createRootReducer(history) {
+export default function createRootReducer() {
   return combineReducers({
-    router: connectRouter(history),
     auth,
     userAccount,
     app,

@@ -1,16 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { createHashHistory } from 'history';
-import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import createRootReducer from '../reducers';
 import * as appActions from '../actions/app';
 
-const history = createHashHistory();
+const rootReducer = createRootReducer();
 
-const rootReducer = createRootReducer(history);
-
-const configureStore = initialState => {
+const configureStore = (initialState) => {
   // Redux Configuration
   const middleware = [];
   const enhancers = [];
@@ -21,7 +17,7 @@ const configureStore = initialState => {
   // Logging Middleware
   const logger = createLogger({
     level: 'info',
-    collapsed: true
+    collapsed: true,
   });
 
   // Skip redux logs in console during the tests
@@ -29,15 +25,10 @@ const configureStore = initialState => {
     middleware.push(logger);
   }
 
-  // Router Middleware
-  const router = routerMiddleware(history);
-  middleware.push(router);
-
   // TODO: add the other actions
   // Redux DevTools Configuration
   const actionCreators = {
     ...appActions,
-    ...routerActions
   };
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
@@ -45,7 +36,7 @@ const configureStore = initialState => {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         // Options: http://extension.remotedev.io/docs/API/Arguments.html
-        actionCreators
+        actionCreators,
       })
     : compose;
   /* eslint-enable no-underscore-dangle */
@@ -68,4 +59,4 @@ const configureStore = initialState => {
   return store;
 };
 
-export default { configureStore, history };
+export default { configureStore };
