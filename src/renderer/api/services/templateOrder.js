@@ -1,5 +1,3 @@
-// import axios from 'axios';
-
 const getTemplateOrder = (accountId) => {
   const promise = new Promise((resolve) => {
     window.electron.ipcRenderer.sendMessage('framework-request', {
@@ -14,7 +12,6 @@ const getTemplateOrder = (accountId) => {
     });
     window.electron.ipcRenderer.on('get-template-order', (response) => {
       resolve(response);
-      // callback(response.data);
     });
   });
   return promise;
@@ -35,7 +32,6 @@ const updateTemplateOrder = (body = {}, auth = {}) => {
     });
     window.electron.ipcRenderer.on('update-template-order', (response) => {
       resolve(response);
-      // callback(response.data);
     });
   });
   return promise;
