@@ -13,7 +13,6 @@ const getTemplateOrder = (accountId) => {
       },
     });
     window.electron.ipcRenderer.on('get-template-order', (response) => {
-      debugger;
       resolve(response);
       // callback(response.data);
     });

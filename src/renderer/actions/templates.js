@@ -46,10 +46,8 @@ const asyncGetTemplates = async (dispatch, state) => {
     dispatch(setBattleCards(battleCards)); // this set battle cards in react toolkit
 
     const templateOrderRes = await getTemplateOrder(user.account_id);
-    debugger;
     const { templates: templateOrder } = templateOrderRes.data;
     const templatesRes = await getBuildTemplates(user.account_id);
-    debugger;
     const { templates } = templatesRes.data;
     const orderedTemplates = templateOrder.map((id) => {
       return templates.find((template) => template.id === id);

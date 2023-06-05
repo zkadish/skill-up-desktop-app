@@ -23,7 +23,7 @@ const cache = createCache({
  * Search params are used to route a newly opened window to it's set of routes
  */
 
-const Root = ({ store, history }) => {
+function Root({ store, history }) {
   const [window, setWindow] = useState(null);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Root = ({ store, history }) => {
       </ConnectedRouter>
     </Provider>
   );
-};
+}
 
 Root.propTypes = {
   history: object.isRequired, // eslint-disable-line
