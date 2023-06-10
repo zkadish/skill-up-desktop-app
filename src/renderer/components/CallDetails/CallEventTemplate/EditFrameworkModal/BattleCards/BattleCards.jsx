@@ -20,7 +20,7 @@ import { uuid } from '../../../../../utils/data';
 
 import classes from './BattleCards.styles';
 
-const BattleCards = (props) => {
+function BattleCards(props) {
   const {
     activeFrameworkBlock,
     activeFrameworkBattleCard,
@@ -31,7 +31,7 @@ const BattleCards = (props) => {
     setActiveFrameworkBattleCard,
     setAlert,
     setAlertDialog,
-    history,
+    setPath,
   } = props;
 
   const [newElementName, setNewElementName] = useState('');
@@ -47,7 +47,7 @@ const BattleCards = (props) => {
     );
 
     if (found) setActiveFrameworkBattleCard(found);
-  }, [history.location.pathname]);
+  }, []);
 
   // set customInput values
   useEffect(() => {
@@ -245,7 +245,7 @@ const BattleCards = (props) => {
   const onClickEditBtn = (element) => (e) => {
     e.stopPropagation();
     setActiveFrameworkBattleCard(element);
-    history.push('/app/calls/templates/modal/blocks/battle-cards/battle-card');
+    setPath('/blocks/battle-cards/battle-card');
   };
 
   const onDelete = (element) => {
@@ -415,7 +415,7 @@ const BattleCards = (props) => {
       </DragDropContext>
     </>
   );
-};
+}
 
 BattleCards.propTypes = {
   activeFrameworkBlock: object, // eslint-disable-line react/forbid-prop-types
@@ -427,7 +427,7 @@ BattleCards.propTypes = {
   setFrameworkBattleCardName: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line react/forbid-prop-types
+  setPath: func.isRequired,
 };
 
 BattleCards.defaultProps = {

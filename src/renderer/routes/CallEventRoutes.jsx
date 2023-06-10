@@ -1,19 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import CallEventWindow from '../containers/CallEventWindow';
 import Authn from '../components/Authn';
 
 function FrameWorkRoutes() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/">
-          <Authn>
-            <CallEventWindow />
-          </Authn>
-        </Route>
-      </Switch>
-    </Router>
+    <HashRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Authn>
+              <CallEventWindow />
+            </Authn>
+          }
+        />
+      </Routes>
+    </HashRouter>
   );
 }
 

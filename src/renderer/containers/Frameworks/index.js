@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 // import { setBuilderTabIndex } from '../../actions/nav';
 import {
@@ -36,7 +35,4 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(Frameworks));
+export default connect(mapStateToProps, mapDispatchToProps)(Frameworks);

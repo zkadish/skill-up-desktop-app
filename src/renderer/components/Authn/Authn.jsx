@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { func, object } from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import routes from '../../constants/routes';
 import { authn } from '../../api/services/authn';
 
 function Authn(props) {
-  const { setAuthenticatedUser, history, children } = props;
-
+  const { setAuthenticatedUser, children } = props;
+  const navigate = useNavigate();
   const [authenticated, setAuthenticated] = useState(false);
 
   const authResponse = useCallback(
@@ -16,9 +17,9 @@ function Authn(props) {
         return;
       }
       setAuthenticated(false);
-      history.push(routes.LOGIN);
+      navigate(routes.LOGIN);
     },
-    [setAuthenticated, setAuthenticatedUser, history]
+    [setAuthenticated, setAuthenticatedUser, navigate]
   );
 
   useEffect(() => {
@@ -31,14 +32,13 @@ function Authn(props) {
         console.log(err);
         debugger;
       });
-  }, [authResponse, history.location.pathname]);
+  }, [authResponse]);
 
   return authenticated && children;
 }
 
 Authn.propTypes = {
   children: object.isRequired, // eslint-disable-line
-  history: object.isRequired, // eslint-disable-line
   setAuthenticatedUser: func.isRequired,
 };
 

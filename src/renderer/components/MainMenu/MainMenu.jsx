@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { object, func, array } from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -26,25 +26,20 @@ import routes from '../../constants/routes';
 
 import classes from './MainMenu.styles';
 
-const MainMenu = (props) => {
-  const {
-    user,
-    toggleNotifyDrawer,
-    eventNotifications,
-    location: { pathname },
-    history,
-  } = props;
-
+function MainMenu(props) {
+  const { user, toggleNotifyDrawer, eventNotifications } = props;
+  const navigate = useNavigate();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [notificationNum, setNotificationNum] = useState(0);
-  // const { url } = useRouteMatch();
   const [activeBtn, setActiveBtn] = useState('calls');
 
   useEffect(() => {
-    const path = pathname.split('/')[2] || 'calls';
+    // debugger
+    const path = location.pathname.split('/')[2] || 'calls';
     setActiveBtn(path);
-  }, [pathname]);
+  }, [location]);
 
   useEffect(() => {
     const eventNum = eventNotifications.length;
@@ -72,32 +67,37 @@ const MainMenu = (props) => {
   };
 
   const onClickCalls = () => {
-    if (pathname.includes(routes.CALLS) || pathname === '/app') return;
-    history.push(`${routes.CALLS}`);
+    if (
+      location.pathname.includes('/app/calls') ||
+      location.pathname === '/app'
+    ) {
+      return;
+    }
+    navigate('/app/calls');
     setActiveBtn('calls');
   };
 
   // const onClickReportsHandler = () => {
-  //   if (pathname.includes(routes.REPORTS)) return;
-  //   history.push(`${routes.REPORTS}`);
+  //   if (location.pathname.includes(routes.REPORTS)) return;
+  //   navigate(`${routes.REPORTS}`);
   // };
 
   const onClickFrameworks = () => {
-    // if (pathname.includes(routes.FRAMEWORKS)) return;
-    // history.push(`${routes.FRAMEWORKS}`);
-    // history.push('/app/frameworks');
-    history.push(routes.FRAMEWORKS);
+    // if (location.pathname.includes(routes.FRAMEWORKS)) return;
+    // navigate(`${routes.FRAMEWORKS}`);
+    navigate('/app/frameworks');
+    // navigate('frameworks');
     setActiveBtn('frameworks');
   };
 
   // const onClickCompaniesHandler = () => {
-  //   if (pathname.includes(routes.REPORTS)) return;
-  //   history.push(`${routes.REPORTS}`);
+  //   if (location.includes(routes.REPORTS)) return;
+  //   navigate(`${routes.REPORTS}`);
   // };
 
   const onClickLibrary = () => {
-    if (pathname.includes(routes.LIBRARY)) return;
-    history.push(`${routes.LIBRARY}`);
+    if (location.pathname.includes(routes.LIBRARY)) return;
+    navigate(`${routes.LIBRARY}`);
     setActiveBtn('library');
   };
 
@@ -271,12 +271,10 @@ const MainMenu = (props) => {
       {ProfileMenu}
     </Box>
   );
-};
+}
 
 MainMenu.propTypes = {
   eventNotifications: array, // eslint-disable-line react/forbid-prop-types
-  history: object.isRequired, // eslint-disable-line react/forbid-prop-types
-  location: object.isRequired, // eslint-disable-line react/forbid-prop-types
   user: object, // eslint-disable-line react/forbid-prop-types
   toggleNotifyDrawer: func,
 };
@@ -287,4 +285,4 @@ MainMenu.defaultProps = {
   user: {},
 };
 
-export default withRouter(MainMenu);
+export default MainMenu;

@@ -30,7 +30,7 @@ import { uuid } from '../../../../../utils/data';
 
 import classes from './Blocks.styles';
 
-const Blocks = (props) => {
+function Blocks(props) {
   const {
     // activeCall,
     callEventModal,
@@ -43,7 +43,7 @@ const Blocks = (props) => {
     activeFrameworkBlock,
     setFrameworkBlockName,
     setFrameworkBlockType,
-    history,
+    setPath,
   } = props;
 
   const [newBlockName, setNewBlockName] = useState('');
@@ -260,10 +260,10 @@ const Blocks = (props) => {
 
     setActiveFrameworkBlock(block);
     if (block.type === 'battle-cards') {
-      history.push('/app/calls/templates/modal/blocks/battle-cards');
+      setPath('/blocks/battle-cards');
       return;
     }
-    history.push('/app/calls/templates/modal/blocks/elements');
+    setPath('/blocks/elements');
   };
 
   const onDelete = (block) => {
@@ -595,13 +595,12 @@ const Blocks = (props) => {
       </Menu>
     </>
   );
-};
+}
 
 Blocks.propTypes = {
   // activeCall: object, // eslint-disable-line
   callEventModal: object, // eslint-disable-line
   activeFrameworkBlock: object, // eslint-disable-line
-  history: object, // eslint-disable-line
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
   setFrameworkBlocks: func.isRequired,
@@ -610,6 +609,7 @@ Blocks.propTypes = {
   setFrameworkBlockType: func.isRequired,
   removeFrameworkBlock: func.isRequired,
   setActiveFrameworkBlock: func.isRequired,
+  setPath: func.isRequired,
 };
 
 export default Blocks;

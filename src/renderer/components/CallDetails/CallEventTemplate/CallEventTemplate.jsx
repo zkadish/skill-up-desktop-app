@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import { object, func, array, bool } from 'prop-types';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Accordion,
@@ -56,7 +57,7 @@ import classes from './CallEventTemplate.styles';
  *
  */
 
-const CallEventTemplate = (props) => {
+function CallEventTemplate(props) {
   const {
     activeCall,
     activeWinCallEvent,
@@ -70,9 +71,8 @@ const CallEventTemplate = (props) => {
     setCallEventNote,
     updateCallEventElement,
     templates,
-    history,
   } = props;
-
+  const navigate = useNavigate();
   const [frameworkSelect, setFrameworkSelect] = useState('');
   const [templateOptions, setTemplateOptions] = useState(null);
   const [researchFieldValues, setResearchFieldValues] = useState({});
@@ -158,7 +158,8 @@ const CallEventTemplate = (props) => {
     setNotesValue(notes);
 
     // reset field values
-    return () => { // eslint-disable-line
+    return () => {
+      // eslint-disable-line
       setResearchFieldValues({});
       setAnswerFieldValues({});
       setCheckBoxValues({});
@@ -310,7 +311,7 @@ const CallEventTemplate = (props) => {
     setCallEventModal({
       open: true,
       onClose: () => {
-        history.push('/app/calls/templates/modal/blocks');
+        navigate('/app/calls/templates');
       },
       template,
       children: <ModalContent />,
@@ -764,7 +765,7 @@ const CallEventTemplate = (props) => {
       )}
     </>
   );
-};
+}
 
 CallEventTemplate.propTypes = {
   addFrameworkTemplate: func.isRequired,
@@ -780,7 +781,6 @@ CallEventTemplate.propTypes = {
   setCallEventNote: func.isRequired,
   templates: array.isRequired, // eslint-disable-line react/forbid-prop-types
   updateCallEventElement: func.isRequired,
-  history: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 CallEventTemplate.defaultProps = {

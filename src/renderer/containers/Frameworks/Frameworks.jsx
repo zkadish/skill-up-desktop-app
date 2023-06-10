@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { object, string, func, array } from 'prop-types';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Paper from '@mui/material/Paper';
 import { Box, Tab, Tabs } from '@mui/material';
@@ -16,7 +16,7 @@ import BreadCrumbs from './BreadCrumbs';
 import routes from '../../constants/routes';
 import classes from './Frameworks.styles';
 
-const Frameworks = (props) => {
+function Frameworks(props) {
   const {
     // getFrameworks,
     // setTemplates,
@@ -25,16 +25,17 @@ const Frameworks = (props) => {
     // setElements,
     activeTemplate,
     // templates,
-    history,
+    // history,
   } = props;
 
   const sec = useRef(0); // 59
   const min = useRef(30); // 59
   const hour = useRef(0); // 24
+
+  const navigate = useNavigate();
   const [seconds, setSeconds] = useState('00');
   const [minutes, setMinutes] = useState('00');
   const [hours, setHours] = useState('00');
-  const { path } = useRouteMatch();
   const [showTabs, setShowTabs] = useState(false);
   const [value, setValue] = useState(0);
 
@@ -42,19 +43,19 @@ const Frameworks = (props) => {
     setValue(tabIndex);
     switch (tabIndex) {
       case 1:
-        history.push('/app/library/battle-cards');
+        navigate('/app/library/battle-cards');
         break;
       case 2:
-        history.push('/app/library/talk-tracks');
+        navigate('/app/library/talk-tracks');
         break;
       default:
-        history.push('/app/library/templates');
+        navigate('/app/library/templates');
     }
   };
 
   useEffect(() => {
-    setShowTabs(history.location.pathname === routes.FRAMEWORKS);
-  }, [history.location.pathname]);
+    setShowTabs(window.location.pathname === routes.FRAMEWORKS);
+  }, []);
 
   const countDown = () => {
     const counter = setInterval(() => {
@@ -139,28 +140,19 @@ const Frameworks = (props) => {
           )}
         </AppBar>
         <Paper sx={{ ...classes.paper }}>
-          <Switch>
-            <Route path={routes.BATTLE_CARD}>
-              <BattleCard />
-            </Route>
-            <Route path={routes.BATTLE_CARDS}>
-              <BattleCards />
-            </Route>
-            <Route path={routes.ELEMENTS}>
-              <Elements />
-            </Route>
-            <Route path={routes.BLOCKS}>
-              <Blocks />
-            </Route>
-            <Route exact path={[routes.FRAMEWORKS, routes.TEMPLATES]}>
-              <Templates history={history} />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path={routes.BATTLE_CARD} element={<BattleCard />} />
+            <Route path={routes.BATTLE_CARDS} element={<BattleCards />} />
+            <Route path={routes.ELEMENTS} element={<Elements />} />
+            <Route path={routes.BLOCKS} element={<Blocks />} />
+            <Route exact path={routes.FRAMEWORKS} element={<Templates />} />
+            <Route exact path={routes.TEMPLATES} element={<Templates />} />
+          </Routes>
         </Paper>
       </Box>
     </Box>
   );
-};
+}
 
 Frameworks.propTypes = {
   activeTemplate: object, // eslint-disable-line
@@ -170,7 +162,7 @@ Frameworks.propTypes = {
   // setElements: func.isRequired,
   // setTemplates: func.isRequired,
   templates: array.isRequired,  // eslint-disable-line
-  history: object, // eslint-disable-line
+  // history: object, // eslint-disable-line
 };
 
 export default Frameworks;

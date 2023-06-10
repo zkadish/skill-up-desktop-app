@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import CallDetails from './CallDetails';
 
@@ -9,5 +8,4 @@ import CallDetails from './CallDetails';
 //   };
 // };
 
-// TODO: make sure withRouter is being used
-export default connect()(withRouter(CallDetails));
+export default connect()(CallDetails);

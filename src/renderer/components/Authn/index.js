@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { setAuthenticatedUser } from '../../actions/auth';
 
@@ -12,13 +11,13 @@ import Authn from './Authn';
 //   };
 // };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      setAuthenticatedUser
+      setAuthenticatedUser,
     },
     dispatch
   );
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(Authn));
+export default connect(null, mapDispatchToProps)(Authn);

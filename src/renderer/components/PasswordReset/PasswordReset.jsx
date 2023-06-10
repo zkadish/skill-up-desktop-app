@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { object } from 'prop-types';
 import { Chat } from '@mui/icons-material';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   // TextField,
   FormControl,
@@ -15,7 +15,7 @@ import {
 import routes from '../../constants/routes';
 import classes from '../Login/Login.styles';
 
-const ForgotPassword = (props) => {
+function ForgotPassword(props) {
   const { history } = props;
 
   const [email, setEmail] = useState('');
@@ -100,10 +100,10 @@ const ForgotPassword = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 ForgotPassword.propTypes = {
-  history: object.isRequired, // eslint-disable-line
+  // history: object.isRequired, // eslint-disable-line
 };
 
-export default withRouter(ForgotPassword);
+export default ForgotPassword;

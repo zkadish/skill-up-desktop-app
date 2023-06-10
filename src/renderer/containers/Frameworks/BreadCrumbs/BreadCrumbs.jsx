@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { object } from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, Breadcrumbs } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import classes from './BreadCrumbs.styles';
 
-const BreadCrumbs = (props) => {
+function BreadCrumbs(props) {
   const {
     activeTemplate,
     activeBlock,
     // activeElement,
     activeBattleCard,
-    history,
     // elements
   } = props;
-
+  const location = useLocation();
   const [pathLength, setPathLength] = useState(0);
 
   useEffect(() => {
-    const { length } = history.location.pathname.split('/');
+    const { length } = location.pathname.split('/');
     setPathLength(length);
-  }, [history.location.pathname]);
+  }, [location.pathname]);
 
   return (
     <Breadcrumbs
@@ -63,7 +62,7 @@ const BreadCrumbs = (props) => {
       )}
     </Breadcrumbs>
   );
-};
+}
 
 BreadCrumbs.propTypes = {
   activeBattleCard: object, // eslint-disable-line
@@ -71,7 +70,6 @@ BreadCrumbs.propTypes = {
   // activeElement: object, // eslint-disable-line
   activeTemplate: object, // eslint-disable-line
   // elements: object, // eslint-disable-line
-  history: object.isRequired // eslint-disable-line
 };
 
 export default BreadCrumbs;

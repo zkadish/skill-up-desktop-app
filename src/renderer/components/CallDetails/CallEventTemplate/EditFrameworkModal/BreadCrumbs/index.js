@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 // import { BindActionsCreator } from 'redux';
-import { withRouter } from 'react-router-dom';
 
 import BreadCrumbs from './BreadCrumbs';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     activeCall: state.app.activeCall,
     activeFrameworkBlock: state.app.activeFrameworkBlock,
@@ -20,4 +19,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps
   // mapDispatchToProps
-)(withRouter(BreadCrumbs));
+)(BreadCrumbs);

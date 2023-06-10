@@ -18,7 +18,7 @@ import { uuid } from '../../../../../utils/data';
 
 import classes from './BattleCard.styles';
 
-const BattleCard = (props) => {
+function BattleCard(props) {
   const {
     activeFrameworkBattleCard,
     activeFrameworkBattleCardTalkTrack,
@@ -29,7 +29,7 @@ const BattleCard = (props) => {
     removeFrameworkBattleCardTalkTrack,
     setAlert,
     setAlertDialog,
-    history,
+    // setPath,
   } = props;
 
   const [newElementName, setNewElementName] = useState('');
@@ -44,7 +44,7 @@ const BattleCard = (props) => {
     );
 
     if (found) setActiveFrameworkBattleCardTalkTrack(found);
-  }, [history.location.pathname]);
+  }, []);
 
   // set customInput values
   useEffect(() => {
@@ -394,7 +394,7 @@ const BattleCard = (props) => {
       )}
     </>
   );
-};
+}
 
 BattleCard.propTypes = {
   activeFrameworkBattleCard: object, // eslint-disable-line react/forbid-prop-types
@@ -406,7 +406,7 @@ BattleCard.propTypes = {
   removeFrameworkBattleCardTalkTrack: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line react/forbid-prop-types
+  // setPath: object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 BattleCard.defaultProps = {

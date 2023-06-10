@@ -5,7 +5,7 @@ import MainMenu from './MainMenu';
 import { toggleNotifyDrawer } from '../../actions/notifications';
 
 // TODO: decide when to use a container to wrap components or its index file
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
     mainNavTabIndex: state.app.mainNavTabIndex,
@@ -14,11 +14,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       // setMainNavTabIndex,
-      toggleNotifyDrawer
+      toggleNotifyDrawer,
     },
     dispatch
   );
