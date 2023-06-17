@@ -1,12 +1,12 @@
 import { createRoot } from 'react-dom/client';
 import Root from './containers/Root';
-import { configureStore, history } from './store/configureStore';
+import configureStore from './store/configureStore';
 
 const store = configureStore();
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
-root.render(<Root store={store} history={history} />);
+root.render(<Root store={store} />);
 
 // calling IPC exposed from preload script
 // window.electron.ipcRenderer.once('ipc-example', (arg) => {

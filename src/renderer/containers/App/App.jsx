@@ -14,7 +14,7 @@ import AppSettings from '../AppSettings';
 import Alert from '../../components/Alert';
 import AlertDialog from '../../components/AlertDialog';
 import Modal from '../../components/Modal';
-import routes from '../../constants/routes';
+// import routes from '../../constants/routes';
 
 // import { createCallEvents } from '../../api/integration/googleCalendar';
 // import { getNotifications } from '../../api/services/cues/api';
@@ -99,9 +99,9 @@ function App(props) {
       <Routes>
         {/* <Route path="/" element={<Calls />} /> */}
         <Route path="calls/*" element={<Calls />} />
-        <Route path="frameworks" element={<Frameworks />} />
+        <Route path="frameworks/*" element={<Frameworks />} />
+        <Route path="library/*" element={<Library />} />
         <Route path="settings" element={<AppSettings />} />
-        {/* <Route path={`${routes.LIBRARY}`} element={<Library />} /> */}
         {/* <Route path={`${routes.REPORTS}`} element={<Reports />} /> */}
       </Routes>
       <Drawer anchor="right" open={notifyDrawer} onClose={toggleDrawer}>

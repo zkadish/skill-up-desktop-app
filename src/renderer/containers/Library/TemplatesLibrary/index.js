@@ -3,31 +3,31 @@ import { bindActionCreators } from 'redux';
 import TemplatesLibrary from './TemplatesLibrary';
 
 import {
-  setTemplates,
+  // setTemplates,
   setTemplate,
   removeTemplate,
   setActiveTemplate,
-  setTemplateName
+  setTemplateName,
 } from '../../../actions/builder';
 import { setAlert, setAlertDialog } from '../../../actions/notifications';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     activeTemplate: state.builder.activeTemplate,
-    templates: state.builder.templates
+    templates: state.builder.templates,
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      setTemplates,
+      // setTemplates,
       setTemplate,
       removeTemplate,
       setActiveTemplate,
       setTemplateName,
       setAlert,
-      setAlertDialog
+      setAlertDialog,
     },
     dispatch
   );

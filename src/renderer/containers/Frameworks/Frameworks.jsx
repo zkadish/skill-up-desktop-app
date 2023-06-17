@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { object, string, func, array } from 'prop-types';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Paper from '@mui/material/Paper';
 import { Box, Tab, Tabs } from '@mui/material';
@@ -13,7 +13,7 @@ import BattleCards from './BattleCards';
 import BattleCard from './BattleCard';
 import BreadCrumbs from './BreadCrumbs';
 
-import routes from '../../constants/routes';
+// import routes from '../../constants/routes';
 import classes from './Frameworks.styles';
 
 function Frameworks(props) {
@@ -25,7 +25,6 @@ function Frameworks(props) {
     // setElements,
     activeTemplate,
     // templates,
-    // history,
   } = props;
 
   const sec = useRef(0); // 59
@@ -33,10 +32,11 @@ function Frameworks(props) {
   const hour = useRef(0); // 24
 
   const navigate = useNavigate();
+  const location = useLocation();
   const [seconds, setSeconds] = useState('00');
   const [minutes, setMinutes] = useState('00');
   const [hours, setHours] = useState('00');
-  const [showTabs, setShowTabs] = useState(false);
+  const [showTabs, setShowTabs] = useState(true);
   const [value, setValue] = useState(0);
 
   const onTabsChange = (e, tabIndex) => {
@@ -54,8 +54,8 @@ function Frameworks(props) {
   };
 
   useEffect(() => {
-    setShowTabs(window.location.pathname === routes.FRAMEWORKS);
-  }, []);
+    setShowTabs(!location.pathname.includes('frameworks/templates/blocks'));
+  }, [location]);
 
   const countDown = () => {
     const counter = setInterval(() => {
@@ -90,19 +90,6 @@ function Frameworks(props) {
 
     return counter;
   };
-
-  // useEffect(() => {
-  //   // debugger
-  //   getFrameworks(history)
-  //     .then(response => {
-  //       console.log(response);
-  //       return response;
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       debugger;
-  //     });
-  // }, []);
 
   return (
     <Box sx={{ ...classes.container }}>
@@ -141,12 +128,19 @@ function Frameworks(props) {
         </AppBar>
         <Paper sx={{ ...classes.paper }}>
           <Routes>
-            <Route path={routes.BATTLE_CARD} element={<BattleCard />} />
-            <Route path={routes.BATTLE_CARDS} element={<BattleCards />} />
-            <Route path={routes.ELEMENTS} element={<Elements />} />
-            <Route path={routes.BLOCKS} element={<Blocks />} />
-            <Route exact path={routes.FRAMEWORKS} element={<Templates />} />
-            <Route exact path={routes.TEMPLATES} element={<Templates />} />
+            <Route path="templates" element={<Templates />} />
+            <Route path="templates/blocks" element={<Blocks />} />
+            <Route path="templates/blocks/elements" element={<Elements />} />
+            <Route
+              path="templates/blocks/battle-cards"
+              element={<BattleCards />}
+            />
+            <Route
+              path="templates/blocks/battle-cards/battle-card"
+              element={<BattleCard />}
+            />
+            {/* <Route path={routes.BATTLE_CARDS} element={<BattleCards />} /> */}
+            {/* <Route path={routes.FRAMEWORKS} element={<Templates />} /> */}
           </Routes>
         </Paper>
       </Box>
@@ -161,8 +155,7 @@ Frameworks.propTypes = {
   // setBlocks: func.isRequired,
   // setElements: func.isRequired,
   // setTemplates: func.isRequired,
-  templates: array.isRequired,  // eslint-disable-line
-  // history: object, // eslint-disable-line
+  templates: array.isRequired, // eslint-disable-line
 };
 
 export default Frameworks;

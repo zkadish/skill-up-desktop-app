@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { object, func, array } from 'prop-types';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
+
 import Paper from '@mui/material/Paper';
 import Input from '@mui/material/OutlinedInput';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -21,7 +23,7 @@ import { uuid } from '../../../utils/data';
 
 import classes from './BattleCardLibrary.styles';
 
-const BattleCardLibrary = (props) => {
+function BattleCardLibrary(props) {
   const {
     activeLibraryBattleCard,
     setActiveLibraryBattleCard,
@@ -34,8 +36,8 @@ const BattleCardLibrary = (props) => {
     setAlertDialog,
     battleCards,
     filteredBattleCards,
-    history,
   } = props;
+  const navigate = useNavigate();
 
   const [newElementName, setNewElementName] = useState('');
   const [customInputValues, setCustomInputValues] = useState({});
@@ -251,7 +253,7 @@ const BattleCardLibrary = (props) => {
     e.stopPropagation();
 
     setActiveLibraryBattleCard(element);
-    history.push('/app/library/battle-cards/talk-tracks');
+    navigate('/app/library/battle-cards/talk-tracks');
   };
 
   const onDelete = (element) => {
@@ -394,7 +396,7 @@ const BattleCardLibrary = (props) => {
       </List>
     </Paper>
   );
-};
+}
 
 BattleCardLibrary.propTypes = {
   setLibraryBattleCard: func.isRequired,
@@ -403,13 +405,12 @@ BattleCardLibrary.propTypes = {
   activeLibraryBattleCard: object, // eslint-disable-line
   setFilteredLibraryBattleCards: func.isRequired, // eslint-disable-line
   setLibraryBattleCardName: func.isRequired,
-  setLibraryBattleCards: func.isRequired,
+  // setLibraryBattleCards: func.isRequired,
   removeLibraryBattleCard: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line
   filteredBattleCards: array, // eslint-disable-line
-  battleCards: array // eslint-disable-line
+  battleCards: array, // eslint-disable-line
 };
 
 export default BattleCardLibrary;

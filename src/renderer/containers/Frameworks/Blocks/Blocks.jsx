@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { object, func } from 'prop-types';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { Box, IconButton } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -24,9 +25,8 @@ import classes from './Blocks.styles';
 
 // TODO: Add validation for: there can only be one Block of type BattleCards!
 
-const Blocks = (props) => {
+function Blocks(props) {
   const {
-    history,
     activeTemplate,
     activeBlock,
     setActiveBlock,
@@ -37,6 +37,7 @@ const Blocks = (props) => {
     setAlert,
     setAlertDialog,
   } = props;
+  const navigate = useNavigate();
 
   const [newBlockName, setNewBlockName] = useState('');
   const [customInputValues, setCustomInputValues] = useState({});
@@ -275,11 +276,11 @@ const Blocks = (props) => {
 
     setActiveBlock(block);
     if (block.type === 'battle-cards') {
-      history.push('/app/frameworks/templates/blocks/battle-cards');
+      navigate('/app/frameworks/templates/blocks/battle-cards');
       return;
     }
 
-    history.push('/app/frameworks/templates/blocks/elements');
+    navigate('/app/frameworks/templates/blocks/elements');
   };
 
   const onDragEnd = (result) => {
@@ -373,7 +374,7 @@ const Blocks = (props) => {
                           className={clsx(
                             'listItem',
                             { active: block.active },
-                            { dragging: snapshot.isDragging },
+                            { dragging: snapshot.isDragging }
                           )}
                         >
                           {/* <CustomInput
@@ -463,7 +464,7 @@ const Blocks = (props) => {
       <MoreMenu anchorEl={anchorEl} onCloseMoreMenu={onCloseMoreMenu} />
     </>
   );
-};
+}
 
 Blocks.propTypes = {
   activeTemplate: object, // eslint-disable-line
@@ -475,7 +476,6 @@ Blocks.propTypes = {
   setBlockName: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object // eslint-disable-line
 };
 
 export default Blocks;

@@ -4,7 +4,6 @@ import { Modal, Box } from '@mui/material';
 
 function ModalWrapper(props) {
   const { callEventModal, setCallEventModal } = props;
-  // debugger;
   const handleCloseModal = () => {
     setCallEventModal({
       open: false,

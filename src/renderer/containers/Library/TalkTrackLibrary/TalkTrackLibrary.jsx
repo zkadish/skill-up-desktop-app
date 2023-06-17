@@ -20,7 +20,7 @@ import { uuid } from '../../../utils/data';
 
 import classes from './TalkTrackLibrary.styles';
 
-const TalkTrackLibrary = (props) => {
+function TalkTrackLibrary(props) {
   const {
     activeLibraryBattleCard,
     activeLibraryTalkTrack,
@@ -272,13 +272,6 @@ const TalkTrackLibrary = (props) => {
     }
   };
 
-  // const onClickEditBtn = talkTrack => e => {
-  //   e.stopPropagation();
-
-  //   setActiveLibraryTalkTrack(talkTrack);
-  //   history.push('/app/library/battle-cards/talk-tracks');
-  // };
-
   const onDelete = (talkTrack) => {
     setAlertDialog({ open: false });
     removeLibraryTalkTrack(talkTrack);
@@ -409,16 +402,6 @@ const TalkTrackLibrary = (props) => {
                   disabled={talkTrack.system}
                   multiline
                 />
-                {/* <IconButton
-                  className={clsx(
-                    iconButtonClasses.root,
-                  )}
-                  color="primary"
-                  onClick={onClickEditBtn(talkTrack)}
-                  disabled={customInputError[talkTrack.id]}
-                >
-                  <EditOutlinedIcon />
-                </IconButton> */}
                 <IconButton
                   className="display"
                   sx={{ ...classes.iconButton }}
@@ -435,7 +418,7 @@ const TalkTrackLibrary = (props) => {
       </List>
     </Paper>
   );
-};
+}
 
 TalkTrackLibrary.propTypes = {
   libraryOnly: bool,
@@ -450,7 +433,6 @@ TalkTrackLibrary.propTypes = {
   removeLibraryTalkTrack: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line
   filteredTalkTracks: array, // eslint-disable-line
   talkTracks: array, // eslint-disable-line
 };

@@ -11,7 +11,7 @@ import TemplatesLibrary from './TemplatesLibrary';
 import TalkTracks from './TalkTracks';
 import BattleCardLibrary from './BattleCardLibrary';
 import TalkTrackLibrary from './TalkTrackLibrary';
-import routes from '../../constants/routes';
+// import routes from '../../constants/routes';
 
 import classes from './Library.styles';
 
@@ -75,18 +75,6 @@ function Library(props) {
     return counter;
   };
 
-  // useEffect(() => {
-  //   getFrameworks(history)
-  //     .then(response => {
-  //       console.log(response);
-  //       return response;
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       // debugger;
-  //     });
-  // }, []);
-
   useEffect(() => {
     const slug = location.pathname.split('/')[3];
     switch (slug) {
@@ -146,28 +134,12 @@ function Library(props) {
         </AppBar>
         <Paper sx={{ ...classes.paper }}>
           <Routes>
-            <Route
-              exact
-              path={routes.LIBRARY_TALK_TRACKS}
-              element={<TalkTrackLibrary />}
-            />
-            <Route
-              exact
-              path={routes.LIBRARY_BATTLE_CARDS}
-              element={<BattleCardLibrary />}
-            />
-            <Route
-              exact
-              path={routes.LIBRARY_BATTLE_CARDS_TALK_TRACKS}
-              element={<TalkTracks />}
-            />
+            <Route path="templates" element={<TemplatesLibrary />} />
+            <Route path="battle-cards" element={<BattleCardLibrary />} />
+            <Route path="talk-tracks" element={<TalkTrackLibrary />} />
+            <Route path="battle-cards/talk-tracks" element={<TalkTracks />} />
             {/* <Route path="/app/frameworks/templates/blocks" element={<Blocks />} /> */}
-            <Route exact path="/app/library" element={<TemplatesLibrary />} />
-            <Route
-              exact
-              path={routes.LIBRARY_TEMPLATES}
-              element={<TemplatesLibrary />}
-            />
+            {/* <Route exact path="/app/library" element={<TemplatesLibrary />} /> */}
           </Routes>
         </Paper>
       </Box>

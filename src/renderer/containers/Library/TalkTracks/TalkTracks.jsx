@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { object, func, array } from 'prop-types';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
+
 import Paper from '@mui/material/Paper';
 import Input from '@mui/material/OutlinedInput';
 import TextField from '@mui/material/TextField';
@@ -19,7 +21,7 @@ import { uuid } from '../../../utils/data';
 
 import classes from './TalkTracks.styles';
 
-const TalkTracks = (props) => {
+function TalkTracks(props) {
   const {
     activeLibraryBattleCard,
     setActiveLibraryBattleCardTackTrack,
@@ -33,8 +35,8 @@ const TalkTracks = (props) => {
     setAlert,
     setAlertDialog,
     talkTracks,
-    history,
   } = props;
+  const navigate = useNavigate();
 
   const [newTalkTrack, setNewTalkTrack] = useState('');
   const [customInputValues, setCustomInputValues] = useState({});
@@ -130,7 +132,7 @@ const TalkTracks = (props) => {
   // Change the name of the active BattleCardTalkTrack
   const onChangeCustomInput = (talkTrack) => (e) => {
     const { value } = e.target;
-    debugger
+    debugger;
     if (value) {
       setCustomInputError({
         ...customInputError,
@@ -182,7 +184,7 @@ const TalkTracks = (props) => {
   };
 
   const onBlurCustomInput = (tt) => () => {
-    debugger
+    debugger;
     const talkTrack = { ...tt };
     if (customInputError[talkTrack.id]) {
       setCustomInputValues({
@@ -262,7 +264,7 @@ const TalkTracks = (props) => {
   };
 
   const onClickBackBtn = () => {
-    history.push(routes.LIBRARY_BATTLE_CARDS);
+    navigate('/app/library/battle-cards');
   };
 
   return (
@@ -315,8 +317,11 @@ const TalkTracks = (props) => {
                       draggableId={element.id}
                       index={index}
                     >
-                      {(provided, snapshot) => ( // eslint-disable-line
-                          // eslint-disable-line
+                      {(
+                        provided,
+                        snapshot // eslint-disable-line
+                      ) => (
+                        // eslint-disable-line
                         <ListItem
                           {...provided.draggableProps}
                           ref={provided.innerRef}
@@ -388,7 +393,7 @@ const TalkTracks = (props) => {
       <TalkTrackLibrary libraryOnly={false} />
     </DragDropContext>
   );
-};
+}
 
 TalkTracks.propTypes = {
   addLibraryTalkTrack: func.isRequired,
@@ -401,7 +406,6 @@ TalkTracks.propTypes = {
   removeBattleCardTalkTrack: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line
   talkTracks: array.isRequired, // eslint-disable-line
 };
 

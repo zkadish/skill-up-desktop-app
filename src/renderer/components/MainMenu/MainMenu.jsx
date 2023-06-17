@@ -30,6 +30,7 @@ function MainMenu(props) {
   const { user, toggleNotifyDrawer, eventNotifications } = props;
   const navigate = useNavigate();
   const location = useLocation();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [notificationNum, setNotificationNum] = useState(0);
@@ -67,13 +68,13 @@ function MainMenu(props) {
   };
 
   const onClickCalls = () => {
-    if (
-      location.pathname.includes('/app/calls') ||
-      location.pathname === '/app'
-    ) {
-      return;
-    }
-    navigate('/app/calls');
+    // if (
+    //   location.pathname.includes('/app/calls') ||
+    //   location.pathname === '/app'
+    // ) {
+    //   return;
+    // }
+    navigate('/app/calls/templates');
     setActiveBtn('calls');
   };
 
@@ -85,7 +86,7 @@ function MainMenu(props) {
   const onClickFrameworks = () => {
     // if (location.pathname.includes(routes.FRAMEWORKS)) return;
     // navigate(`${routes.FRAMEWORKS}`);
-    navigate('/app/frameworks');
+    navigate('/app/frameworks/templates');
     // navigate('frameworks');
     setActiveBtn('frameworks');
   };

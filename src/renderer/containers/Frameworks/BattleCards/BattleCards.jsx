@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { object, func, array } from 'prop-types';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import Paper from '@mui/material/Paper';
 import Input from '@mui/material/OutlinedInput';
@@ -19,7 +20,7 @@ import BattleCardLibrary from '../BattleCardLibrary';
 
 import classes from './BattleCards.style';
 
-const BattleCards = (props) => {
+function BattleCards(props) {
   const {
     activeTemplate,
     setLibraryBattleCard,
@@ -38,8 +39,8 @@ const BattleCards = (props) => {
     setAlert,
     setAlertDialog,
     // setActiveBlock,
-    history,
   } = props;
+  const navigate = useNavigate();
 
   const [newElementName, setNewElementName] = useState('');
   const [customInputValues, setCustomInputValues] = useState({});
@@ -269,7 +270,7 @@ const BattleCards = (props) => {
     e.stopPropagation();
 
     setActiveBattleCard(battleCard);
-    history.push('/app/frameworks/templates/blocks/battle-cards/battle-card');
+    navigate('/app/frameworks/templates/blocks/battle-cards/battle-card');
   };
 
   const onDelete = (battleCard) => {
@@ -454,7 +455,7 @@ const BattleCards = (props) => {
       )}
     </>
   );
-};
+}
 
 BattleCards.propTypes = {
   addLibraryBattleCard: func.isRequired,
@@ -472,8 +473,7 @@ BattleCards.propTypes = {
   removeBattleCard: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line
-  battleCards: array // eslint-disable-line
+  battleCards: array, // eslint-disable-line
 };
 
 export default BattleCards;

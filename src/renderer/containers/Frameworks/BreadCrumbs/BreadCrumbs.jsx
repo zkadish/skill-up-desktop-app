@@ -31,7 +31,7 @@ function BreadCrumbs(props) {
       {pathLength === 4 && <Box className="inactive">TEMPLATES</Box>}
       {pathLength >= 5 && (
         // <Link to="/app/frameworks/templates" className="active">
-        <Link to="/app/frameworks" className="active">
+        <Link to="templates" className="active">
           TEMPLATES
         </Link>
       )}
@@ -40,7 +40,7 @@ function BreadCrumbs(props) {
         <Box className="inactive">{activeTemplate.label}</Box>
       )}
       {activeTemplate && pathLength >= 6 && (
-        <Link to="/app/frameworks/templates/blocks" className="active">
+        <Link to="templates/blocks" className="active">
           {activeTemplate.label}
         </Link>
       )}
@@ -49,10 +49,7 @@ function BreadCrumbs(props) {
         <Box className="inactive">{activeBlock.label}</Box>
       )}
       {activeBlock && pathLength >= 7 && (
-        <Link
-          to="/app/frameworks/templates/blocks/battle-cards"
-          className="active"
-        >
+        <Link to="templates/blocks/battle-cards" className="active">
           {activeBlock.label}
         </Link>
       )}
