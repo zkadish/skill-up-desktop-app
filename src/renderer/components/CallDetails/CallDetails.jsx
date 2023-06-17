@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { object } from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { Box } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
@@ -11,12 +11,12 @@ import Tab from '@mui/material/Tab';
 import CallEventTemplate from './CallEventTemplate';
 import History from './History';
 import CallEventSettings from '../../containers/CallEventSettings';
-import routes from '../../constants/routes';
+// import routes from '../../constants/routes';
 
 import classes from './CallDetails.styles';
 
-const CallDetails = (props) => {
-  const { history } = props;
+function CallDetails() {
+  const navigate = useNavigate();
 
   const [value, setValue] = useState(0);
   // const [settingsPage, setSettingsPage] = useState(null);
@@ -32,23 +32,23 @@ const CallDetails = (props) => {
 
   useEffect(() => {
     setValue(0);
-    // history.push('/app/calls/templates');
+    // navigate('/app/calls/templates');
   }, []);
 
   const onTabsChange = (e, tabIndex) => {
     setValue(tabIndex);
     switch (tabIndex) {
       case 1:
-        history.push(`${routes.HISTORY}`);
+        navigate('history');
         break;
       case 2:
-        history.push(`${routes.CALL_EVENT_SETTINGS}`);
+        navigate('settings');
         break;
       // case 2:
-      //   history.push('/app/calls/notes');
+      //   navigate('/app/calls/notes');
       //   break;
       default:
-        history.push(`${routes.CALL_TEMPLATES}`);
+        navigate('templates');
     }
   };
 
@@ -68,34 +68,21 @@ const CallDetails = (props) => {
         </Tabs>
       </AppBar>
       <Paper sx={{ ...classes.paper }}>
-        <Switch>
-          {/* <Route path="/app/calls/notes">
-            <Notes />
-          </Route> */}
-          <Route path={`${routes.CALL_EVENT_SETTINGS}`}>
-            <CallEventSettings />
-          </Route>
-          <Route path={`${routes.HISTORY}`}>
-            <History />
-          </Route>
-          <Route
-            path={[
-              `${routes.APP}`,
-              `${routes.CALLS}`,
-              `${routes.CALL_TEMPLATES}`,
-            ]}
-          >
-            <CallEventTemplate />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="templates/*" element={<CallEventTemplate />} />
+          <Route path="history" element={<History />} />
+          <Route path="settings" element={<CallEventSettings />} />
+          {/* <Route path="/app/calls/notes" elements={<Notes />} /> */}
+          {/* <Route path={routes.APP} element={<CallEventTemplate />} />
+          <Route path={routes.CALLS} element={<CallEventTemplate />} /> */}
+        </Routes>
       </Paper>
     </Box>
   );
-};
+}
 
 CallDetails.propTypes = {
-  history: object, // eslint-disable-line
-  activeCall: object // eslint-disable-line
+  activeCall: object, // eslint-disable-line
 };
 
 CallDetails.defaultProps = {

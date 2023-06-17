@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 import Elements from './Elements';
 
 import {
@@ -9,11 +8,11 @@ import {
   setFrameworkElementName,
   removeFrameworkElement,
   setFrameworkElements,
-  setFrameworkElementType
+  setFrameworkElementType,
 } from '../../../../../actions/app';
 import { setAlert, setAlertDialog } from '../../../../../actions/notifications';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     activeFrameworkBlock: state.app.activeFrameworkBlock,
     activeFrameworkElement: state.app.activeFrameworkElement
@@ -30,13 +29,10 @@ function mapDispatchToProps(dispatch) {
       setFrameworkElements,
       setFrameworkElementType,
       setAlert,
-      setAlertDialog
+      setAlertDialog,
     },
     dispatch
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(Elements));
+export default connect(mapStateToProps, mapDispatchToProps)(Elements);

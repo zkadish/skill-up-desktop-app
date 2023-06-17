@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 import BattleCard from './BattleCard';
 
 import {
@@ -12,7 +11,7 @@ import {
 } from '../../../../../actions/app';
 import { setAlert, setAlertDialog } from '../../../../../actions/notifications';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     activeFrameworkBattleCard: state.app.activeFrameworkBattleCard,
     activeFrameworkBattleCardTalkTrack:
@@ -29,13 +28,10 @@ function mapDispatchToProps(dispatch) {
       setFrameworkBattleCardTalkTrackName,
       removeFrameworkBattleCardTalkTrack,
       setAlert,
-      setAlertDialog
+      setAlertDialog,
     },
     dispatch
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(BattleCard));
+export default connect(mapStateToProps, mapDispatchToProps)(BattleCard);

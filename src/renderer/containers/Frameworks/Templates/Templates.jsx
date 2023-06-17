@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { object, func, array, string } from 'prop-types';
+import { object, func, array } from 'prop-types';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { Box, IconButton } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -16,7 +17,7 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import Spinner from '../../../components/Spinner';
 import { severity, dialog } from '../../../constants/notifications';
 import { uuid } from '../../../utils/data';
-import { isEmpty, notUnique, isAllowedChar } from '../utils/validation';
+import { isEmpty, notUnique } from '../utils/validation';
 
 import classes from './Templates.styles';
 
@@ -38,7 +39,7 @@ import classes from './Templates.styles';
  * assigned framework template
  */
 
-const Templates = (props) => {
+function Templates(props) {
   const {
     templates,
     activeTemplate,
@@ -49,8 +50,8 @@ const Templates = (props) => {
     setTemplateName,
     setAlert,
     setAlertDialog,
-    history,
   } = props;
+  const navigate = useNavigate();
 
   const [newTemplateName, setNewTemplateName] = useState('');
   const [customInputValues, setCustomInputValues] = useState({});
@@ -264,7 +265,7 @@ const Templates = (props) => {
     e.stopPropagation();
 
     setActiveTemplate(template);
-    history.push('/app/frameworks/templates/blocks');
+    navigate('/app/frameworks/templates/blocks');
   };
 
   const onDragEnd = (result) => {
@@ -411,19 +412,18 @@ const Templates = (props) => {
       </DragDropContext>
     </Paper>
   );
-};
+}
 
 Templates.propTypes = {
   activeTemplate: object, // eslint-disable-line
   setActiveTemplate: func.isRequired,
-  history: object, // eslint-disable-line
   setTemplates: func.isRequired,
   setTemplate: func.isRequired,
   removeTemplate: func.isRequired,
   setTemplateName: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  templates: array // eslint-disable-line
+  templates: array, // eslint-disable-line
 };
 
 export default Templates;

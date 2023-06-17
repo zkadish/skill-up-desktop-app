@@ -20,7 +20,7 @@ import { uuid } from '../../../utils/data';
 
 import classes from './TalkTrackLibrary.styles';
 
-const TalkTrackLibrary = (props) => {
+function TalkTrackLibrary(props) {
   const {
     addLibraryTalkTrack,
     activeBattleCard,
@@ -37,7 +37,6 @@ const TalkTrackLibrary = (props) => {
     setAlertDialog,
     talkTracks,
     filteredTalkTracks,
-    // history,
   } = props;
 
   const [newElementName, setNewElementName] = useState('');
@@ -48,8 +47,8 @@ const TalkTrackLibrary = (props) => {
   // const [talkTrackState, setBattleCardState] = useState([]);
 
   useEffect(() => {
-    const libraryIds = activeBattleCard['talk-tracks'].map(e => e.library_id);
-    const libTalkTracks = talkTracks.map(b => {
+    const libraryIds = activeBattleCard['talk-tracks'].map((e) => e.library_id);
+    const libTalkTracks = talkTracks.map((b) => {
       const talkTrack = { ...b };
       if (libraryIds.includes(talkTrack.library_id)) {
         talkTrack.selected = true;
@@ -73,7 +72,7 @@ const TalkTrackLibrary = (props) => {
     setCustomInputValues(talkTracksInputValues);
   }, [talkTracks]);
 
-  const onClickAddBtn = type => () => {
+  const onClickAddBtn = (type) => () => {
     const cleanValue = newElementName.trim();
     if (isEmpty(cleanValue)) return;
 
@@ -99,7 +98,7 @@ const TalkTrackLibrary = (props) => {
     setNewElementName('');
   };
 
-  const onChangeAddInput = e => {
+  const onChangeAddInput = (e) => {
     const { value } = e.target;
 
     if (notUnique(filteredTalkTracks, value)) {
@@ -120,17 +119,17 @@ const TalkTrackLibrary = (props) => {
     setNewElementName(value);
   };
 
-  const onKeyPressAddInput = type => e => {
+  const onKeyPressAddInput = (type) => (e) => {
     if (addInputError) return;
     if (e.key === 'Enter') onClickAddBtn(type)();
   };
 
-  const onClickListItem = talkTrack => () => {
+  const onClickListItem = (talkTrack) => () => {
     if (activeLibraryTalkTrack?.id === talkTrack.id) return;
     setActiveLibraryTalkTrack(talkTrack);
   };
 
-  const onChangeCustomInput = talkTrack => e => {
+  const onChangeCustomInput = (talkTrack) => (e) => {
     const { value } = e.target;
 
     if (value) {
@@ -223,7 +222,7 @@ const TalkTrackLibrary = (props) => {
     });
   };
 
-  const onBlurCustomInput = ele => () => {
+  const onBlurCustomInput = (ele) => () => {
     const talkTrack = { ...ele };
     if (customInputError[talkTrack.id]) {
       setCustomInputValues({
@@ -248,28 +247,21 @@ const TalkTrackLibrary = (props) => {
     setActiveLibraryTalkTrack(talkTrack);
   };
 
-  const onKeyPressCustomInput = talkTrack => e => {
+  const onKeyPressCustomInput = (talkTrack) => (e) => {
     if (customInputError[talkTrack.id]) return;
     if (e.key === 'Enter') {
       onBlurCustomInput(talkTrack)();
     }
   };
 
-  // const onClickEditBtn = talkTrack => e => {
-  //   e.stopPropagation();
-
-  //   // setActiveLibraryTalkTrack(talkTrack);
-  //   history.push('/app/library/battle-cards/talk-tracks');
-  // };
-
-  const onDelete = talkTrack => {
+  const onDelete = (talkTrack) => {
     setAlertDialog({ open: false });
     // TODO: handle removing from an element
     // removeBattleCardTalkTrack(talkTrack, activeBattleCard);
     removeLibraryTalkTrack(talkTrack);
   };
 
-  const onClickDeleteBtn = talkTrack => e => {
+  const onClickDeleteBtn = (talkTrack) => (e) => {
     e.stopPropagation();
 
     setAlertDialog({
@@ -286,10 +278,10 @@ const TalkTrackLibrary = (props) => {
   //   setLibraryTalkTrack(talkTrack);
   // };
 
-  const onChangeSearchInput = e => {
+  const onChangeSearchInput = (e) => {
     const key = e.target.value.trimStart();
     setSearchValue(key);
-    const searchResults = talkTracks.filter(talkTrack => {
+    const searchResults = talkTracks.filter((talkTrack) => {
       return talkTrack.value.toLowerCase().includes(key.toLowerCase());
     });
 
@@ -302,7 +294,7 @@ const TalkTrackLibrary = (props) => {
     setFilteredLibraryTalkTracks(talkTracks);
   };
 
-  const onAddLibraryTalkTrack = t => () => {
+  const onAddLibraryTalkTrack = (t) => () => {
     const talkTrack = { ...t };
     talkTrack.container_id = activeBattleCard.id;
     addLibraryTalkTrack(talkTrack, activeBattleCard);
@@ -450,7 +442,7 @@ const TalkTrackLibrary = (props) => {
       </List>
     </Paper>
   );
-};
+}
 
 TalkTrackLibrary.propTypes = {
   addLibraryTalkTrack: func.isRequired,
@@ -458,7 +450,7 @@ TalkTrackLibrary.propTypes = {
   activeBattleCard: object.isRequired, // eslint-disable-line
   setLibraryTalkTrack: func.isRequired,
   setActiveLibraryTalkTrack: func.isRequired,
-  activeLibraryTalkTrack: object,  // eslint-disable-line
+  activeLibraryTalkTrack: object, // eslint-disable-line
   activeTemplate: object, // eslint-disable-line
   setFilteredLibraryTalkTracks: func.isRequired, // eslint-disable-line
   setLibraryTalkTrackName: func.isRequired,
@@ -466,9 +458,8 @@ TalkTrackLibrary.propTypes = {
   removeLibraryTalkTrack: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line
   filteredTalkTracks: array, // eslint-disable-line
-  talkTracks: array // eslint-disable-line
+  talkTracks: array, // eslint-disable-line
 };
 
 export default TalkTrackLibrary;

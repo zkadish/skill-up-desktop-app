@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import Blocks from './Blocks';
 
@@ -9,11 +8,11 @@ import {
   setActiveFrameworkBlock,
   removeFrameworkBlock,
   setFrameworkBlockName,
-  setFrameworkBlockType
+  setFrameworkBlockType,
 } from '../../../../../actions/app';
 import { setAlert, setAlertDialog } from '../../../../../actions/notifications';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     // activeCall: state.app.activeCall,
     callEventModal: state.app.callEventModal,
@@ -31,10 +30,10 @@ function mapDispatchToProps(dispatch) {
       setFrameworkBlockName,
       setFrameworkBlockType,
       setAlert,
-      setAlertDialog
+      setAlertDialog,
     },
     dispatch
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Blocks));
+export default connect(mapStateToProps, mapDispatchToProps)(Blocks);

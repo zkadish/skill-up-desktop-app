@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { object, func } from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Chat } from '@mui/icons-material';
 import {
   Button,
@@ -26,9 +26,8 @@ function Login(props) {
     setUserAccount,
     setDaysEventHistory,
     setDaysEventFuture,
-    history,
   } = props;
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -78,7 +77,8 @@ function Login(props) {
     if (status === 200) {
       setAuthenticatedUser(data.user);
       setAccessToken(data.accessToken);
-      history.push(routes.APP);
+
+      navigate('/app/calls/templates');
       getUserAccount(data.user)
         .then((res) => {
           const { userAccount } = res.data;
@@ -213,7 +213,6 @@ function Login(props) {
 }
 
 Login.propTypes = {
-  history: object.isRequired, // eslint-disable-line
   setAccessToken: func.isRequired,
   setAuthenticatedUser: func.isRequired,
   setDaysEventHistory: func.isRequired,

@@ -1,17 +1,16 @@
 import { connect } from 'react-redux';
 // import { BindActionsCreator } from 'redux';
-import { withRouter } from 'react-router-dom';
 
 import BreadCrumbs from './BreadCrumbs';
 
 // import {} from '../../../actions/notifications';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     activeTemplate: state.builder.activeTemplate,
     activeBlock: state.builder.activeBlock,
     // activeElement: state.builder.activeElement,
-    activeBattleCard: state.builder.activeBattleCard
+    activeBattleCard: state.builder.activeBattleCard,
     // elements: state.builder.elements
   };
 };
@@ -20,7 +19,4 @@ const mapStateToProps = state => {
 //   return BindActionsCreator({}, dispatch);
 // };
 
-export default connect(
-  mapStateToProps
-  // mapDispatchToProps
-)(withRouter(BreadCrumbs));
+export default connect(mapStateToProps)(BreadCrumbs);

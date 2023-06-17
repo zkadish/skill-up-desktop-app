@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { object } from 'prop-types';
+
 import { Chat } from '@mui/icons-material';
-import { withRouter, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   // TextField,
   FormControl,
@@ -15,8 +16,8 @@ import {
 import routes from '../../constants/routes';
 import classes from '../Login/Login.styles';
 
-const ForgotPassword = (props) => {
-  const { history } = props;
+function ForgotPassword() {
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState({
@@ -34,7 +35,7 @@ const ForgotPassword = (props) => {
 
   const onClickHandler = () => {
     // TODO: add reset password endpoint
-    history.push(routes.LOGIN);
+    navigate('/');
   };
 
   const onCreateAccount = () => {
@@ -100,10 +101,6 @@ const ForgotPassword = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
-ForgotPassword.propTypes = {
-  history: object.isRequired, // eslint-disable-line
-};
-
-export default withRouter(ForgotPassword);
+export default ForgotPassword;

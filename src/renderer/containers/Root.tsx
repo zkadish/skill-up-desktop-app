@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
-import Routes from '../routes/Routes';
+import AppRoutes from '../routes/AppRoutes';
 import CallEventRoutes from '../routes/CallEventRoutes';
 import theme from '../styles/theme';
 
@@ -38,7 +38,7 @@ function Root({ store }: any) {
       <StyledEngineProvider injectFirst>
         <CacheProvider value={cache}>
           <ThemeProvider theme={theme}>
-            {electronWindow === 'main' && <Routes />}
+            {electronWindow === 'main' && <AppRoutes />}
             {electronWindow === 'frameWork' && <CallEventRoutes />}
           </ThemeProvider>
         </CacheProvider>

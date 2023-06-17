@@ -2,9 +2,8 @@ import React from 'react';
 import { func, object } from 'prop-types';
 import { Modal, Box } from '@mui/material';
 
-const ModalWrapper = (props) => {
+function ModalWrapper(props) {
   const { callEventModal, setCallEventModal } = props;
-
   const handleCloseModal = () => {
     setCallEventModal({
       open: false,
@@ -21,7 +20,7 @@ const ModalWrapper = (props) => {
       {callEventModal.children || <Box />}
     </Modal>
   );
-};
+}
 
 ModalWrapper.propTypes = {
   callEventModal: object, // eslint-disable-line

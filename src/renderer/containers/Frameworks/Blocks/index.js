@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import Blocks from './Blocks';
 
@@ -8,14 +7,14 @@ import {
   setBlock,
   removeBlock,
   setActiveBlock,
-  setBlockName
+  setBlockName,
 } from '../../../actions/builder';
 import { setAlert, setAlertDialog } from '../../../actions/notifications';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     activeTemplate: state.builder.activeTemplate,
-    activeBlock: state.builder.activeBlock
+    activeBlock: state.builder.activeBlock,
     // blocks: state.builder.blocks
   };
 };
@@ -35,4 +34,4 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Blocks));
+export default connect(mapStateToProps, mapDispatchToProps)(Blocks);

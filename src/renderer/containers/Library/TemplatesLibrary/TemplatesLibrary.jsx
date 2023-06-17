@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { object, func, array } from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
+
 import { Box, IconButton, TextField } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
@@ -21,19 +23,19 @@ import { isEmpty, notUnique, isAllowedChar } from '../utils/validation';
 
 import classes from './TemplatesLibrary.styles';
 
-const TemplatesLibrary = (props) => {
+function TemplatesLibrary(props) {
   const {
     activeTemplate,
     setActiveTemplate,
     templates,
-    setTemplates,
+    // setTemplates,
     setTemplate,
     removeTemplate,
     setTemplateName,
     setAlert,
     setAlertDialog,
-    history,
   } = props;
+  const navigate = useNavigate();
 
   const [newTemplateName, setNewTemplateName] = useState('');
   const [customInputValues, setCustomInputValues] = useState({});
@@ -250,7 +252,7 @@ const TemplatesLibrary = (props) => {
     e.stopPropagation();
 
     setActiveTemplate(template);
-    history.push('/app/frameworks/templates/blocks');
+    navigate('/app/frameworks/templates/blocks');
   };
 
   const onChangeSearchInput = (e) => {
@@ -352,19 +354,18 @@ const TemplatesLibrary = (props) => {
       </List>
     </Paper>
   );
-};
+}
 
 TemplatesLibrary.propTypes = {
   activeTemplate: object, // eslint-disable-line
   setActiveTemplate: func.isRequired,
-  history: object, // eslint-disable-line
-  setTemplates: func.isRequired,
+  // setTemplates: func.isRequired,
   setTemplate: func.isRequired,
   removeTemplate: func.isRequired,
   setTemplateName: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  templates: array // eslint-disable-line
+  templates: array, // eslint-disable-line
 };
 
 export default TemplatesLibrary;

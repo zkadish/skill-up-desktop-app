@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 import BattleCard from './BattleCard';
 
 import {
@@ -16,7 +15,7 @@ import {
 } from '../../../actions/builder';
 import { setAlert, setAlertDialog } from '../../../actions/notifications';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     activeTemplate: state.builder.activeTemplate,
     activeElement: state.builder.activeElement,
@@ -41,11 +40,8 @@ function mapDispatchToProps(dispatch) {
       setAlert,
       setAlertDialog,
     },
-    dispatch,
+    dispatch
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withRouter(BattleCard));
+export default connect(mapStateToProps, mapDispatchToProps)(BattleCard);

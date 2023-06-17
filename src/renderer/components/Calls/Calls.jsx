@@ -8,7 +8,7 @@ import CallDetails from '../CallDetails';
 import classes from './Calls.styles';
 
 function Calls(props) {
-  const { history, daysEvents, setActiveCall, activeCall } = props;
+  const { daysEvents, setActiveCall, activeCall } = props;
   const eventIndex = useRef(-1);
 
   useEffect(() => {
@@ -45,7 +45,6 @@ function Calls(props) {
 
                 return (
                   <CallEvent
-                    history={history}
                     index={eventIndex.current}
                     event={event}
                     key={event.id}
@@ -64,7 +63,6 @@ function Calls(props) {
 Calls.propTypes = {
   activeCall: object, // eslint-disable-line
   daysEvents: array, // eslint-disable-line
-  history: object.isRequired, // eslint-disable-line
   setActiveCall: func.isRequired,
 };
 

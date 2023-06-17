@@ -18,7 +18,7 @@ import { uuid } from '../../../utils/data';
 
 import classes from './Elements.styles';
 
-const Elements = (props) => {
+function Elements(props) {
   const {
     activeTemplate,
     activeBlock,
@@ -397,18 +397,19 @@ const Elements = (props) => {
                             <IconButton
                               {...provided.dragHandleProps}
                               className={clsx({
-                                display: !snapshot.isDragging
+                                display: !snapshot.isDragging,
                               })}
                               sx={{ ...classes.iconButton }}
                               color="primary"
                               onMouseDown={onMouseDownDragBtn(element)}
                               disabled={activeTemplate.system}
-                              size="large">
+                              size="large"
+                            >
                               <DragIndicatorIcon />
                             </IconButton>
                             <IconButton
                               className={clsx({
-                                display: !snapshot.isDragging
+                                display: !snapshot.isDragging,
                               })}
                               sx={{ ...classes.iconButton }}
                               color="primary"
@@ -433,7 +434,7 @@ const Elements = (props) => {
       <MoreMenu anchorEl={anchorEl} onCloseMoreMenu={onCloseMoreMenu} />
     </>
   );
-};
+}
 
 Elements.propTypes = {
   activeTemplate: object, // eslint-disable-line
@@ -446,7 +447,6 @@ Elements.propTypes = {
   removeElement: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line
   // elements: object.isRequired, // eslint-disable-line
 };
 

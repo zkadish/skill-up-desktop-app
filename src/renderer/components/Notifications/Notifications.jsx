@@ -1,5 +1,6 @@
 import React from 'react';
 import { array, object, func } from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 import { MenuList, MenuItem, Divider, Box } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
@@ -42,19 +43,20 @@ const iconButtonStyles = makeStyles({
   },
 });
 
-const Notifications = (props) => {
+function Notifications(props) {
   const {
-    history,
     // notifications,
     eventNotifications,
     closeEventNotification,
   } = props;
+  const navigate = useNavigate();
+
   const menuItemClasses = menuItemStyles();
   const iconButtonClasses = iconButtonStyles();
 
   const onEventNotificationClick = (notification) => () => {
     closeEventNotification(notification);
-    history.push(notification.link);
+    navigate(notification.link);
   };
 
   const onCloseNotification = (notification) => (e) => {
@@ -104,10 +106,9 @@ const Notifications = (props) => {
       })}
     </MenuList>
   );
-};
+}
 
 Notifications.propTypes = {
-  history: object, // eslint-disable-line
   notifications: array, // eslint-disable-line
   eventNotifications: array, // eslint-disable-line
   closeEventNotification: func.isRequired,

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { func, object, array, bool, number } from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
-import { Box } from '@mui/material';
-import Drawer from '@material-ui/core/Drawer';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { Box, Drawer } from '@mui/material';
+// import Drawer from '@material-ui/core/Drawer';
 
 import MainMenu from '../../components/MainMenu';
 import Notifications from '../../components/Notifications';
@@ -14,14 +14,14 @@ import AppSettings from '../AppSettings';
 import Alert from '../../components/Alert';
 import AlertDialog from '../../components/AlertDialog';
 import Modal from '../../components/Modal';
-import routes from '../../constants/routes';
+// import routes from '../../constants/routes';
 
 // import { createCallEvents } from '../../api/integration/googleCalendar';
 // import { getNotifications } from '../../api/services/cues/api';
 
 import classes from './App.styles';
 
-const App = (props) => {
+function App(props) {
   const {
     user,
     // setNotifications,
@@ -40,7 +40,7 @@ const App = (props) => {
     daysEventFuture,
     daysEventHistory,
   } = props;
-
+  const location = useLocation();
   // const [templatesRequested, setTemplatesRequested] = useState(false);
 
   /**
@@ -96,21 +96,14 @@ const App = (props) => {
   return (
     <Box sx={{ ...classes.root }}>
       <MainMenu />
-      <Switch>
-        <Route path={`${routes.APP_SETTINGS}`}>
-          <AppSettings />
-        </Route>
-        <Route path={`${routes.LIBRARY}`}>
-          <Library />
-        </Route>
-        <Route path={`${routes.FRAMEWORKS}`}>
-          <Frameworks />
-        </Route>
-        {/* <Route path={`${routes.REPORTS}`} component={Reports} /> */}
-        <Route path={[routes.APP, `${routes.CALLS}`]}>
-          <Calls />
-        </Route>
-      </Switch>
+      <Routes>
+        {/* <Route path="/" element={<Calls />} /> */}
+        <Route path="calls/*" element={<Calls />} />
+        <Route path="frameworks/*" element={<Frameworks />} />
+        <Route path="library/*" element={<Library />} />
+        <Route path="settings" element={<AppSettings />} />
+        {/* <Route path={`${routes.REPORTS}`} element={<Reports />} /> */}
+      </Routes>
       <Drawer anchor="right" open={notifyDrawer} onClose={toggleDrawer}>
         <Notifications />
       </Drawer>
@@ -119,7 +112,7 @@ const App = (props) => {
       <Modal />
     </Box>
   );
-};
+}
 
 App.propTypes = {
   // daysDates: array.isRequired, // eslint-disable-line

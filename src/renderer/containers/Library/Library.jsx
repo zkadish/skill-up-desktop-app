@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { object, string, func, array } from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Paper from '@mui/material/Paper';
 import Tabs from '@mui/material/Tabs';
@@ -11,11 +11,11 @@ import TemplatesLibrary from './TemplatesLibrary';
 import TalkTracks from './TalkTracks';
 import BattleCardLibrary from './BattleCardLibrary';
 import TalkTrackLibrary from './TalkTrackLibrary';
-import routes from '../../constants/routes';
+// import routes from '../../constants/routes';
 
 import classes from './Library.styles';
 
-const Library = (props) => {
+function Library(props) {
   const {
     // getFrameworks,
     // filteredTalkTracks,
@@ -28,12 +28,14 @@ const Library = (props) => {
     // setElements,
     activeTemplate,
     // templates,
-    history,
   } = props;
 
   const sec = useRef(0); // 59
   const min = useRef(30); // 59
   const hour = useRef(0); // 24
+
+  const location = useLocation();
+  const navigate = useNavigate();
   const [seconds, setSeconds] = useState('00');
   const [minutes, setMinutes] = useState('00');
   const [hours, setHours] = useState('00');
@@ -73,20 +75,8 @@ const Library = (props) => {
     return counter;
   };
 
-  // useEffect(() => {
-  //   getFrameworks(history)
-  //     .then(response => {
-  //       console.log(response);
-  //       return response;
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       // debugger;
-  //     });
-  // }, []);
-
   useEffect(() => {
-    const slug = history.location.pathname.split('/')[3];
+    const slug = location.pathname.split('/')[3];
     switch (slug) {
       case 'battle-cards':
         setValue(1);
@@ -97,20 +87,20 @@ const Library = (props) => {
       default:
         setValue(0);
     }
-  }, [history.location.pathname]);
+  }, [location]);
 
   // TODO: add paths to the constants routes file
   const onTabsChange = (e, tabIndex) => {
     setValue(tabIndex);
     switch (tabIndex) {
       case 1:
-        history.push('/app/library/battle-cards');
+        navigate('/app/library/battle-cards');
         break;
       case 2:
-        history.push('/app/library/talk-tracks');
+        navigate('/app/library/talk-tracks');
         break;
       default:
-        history.push('/app/library/templates');
+        navigate('/app/library/templates');
     }
   };
 
@@ -143,29 +133,19 @@ const Library = (props) => {
           </Tabs>
         </AppBar>
         <Paper sx={{ ...classes.paper }}>
-          <Switch>
-            <Route exact path={routes.LIBRARY_TALK_TRACKS}>
-              <TalkTrackLibrary />
-            </Route>
-            <Route exact path={routes.LIBRARY_BATTLE_CARDS}>
-              <BattleCardLibrary />
-            </Route>
-            <Route exact path={routes.LIBRARY_BATTLE_CARDS_TALK_TRACKS}>
-              <TalkTracks />
-              {/* <BattleCard /> */}
-            </Route>
-            {/* <Route path="/app/frameworks/templates/blocks">
-              <Blocks />
-            </Route> */}
-            <Route exact path={['/app/library', routes.LIBRARY_TEMPLATES]}>
-              <TemplatesLibrary history={history} />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="templates" element={<TemplatesLibrary />} />
+            <Route path="battle-cards" element={<BattleCardLibrary />} />
+            <Route path="talk-tracks" element={<TalkTrackLibrary />} />
+            <Route path="battle-cards/talk-tracks" element={<TalkTracks />} />
+            {/* <Route path="/app/frameworks/templates/blocks" element={<Blocks />} /> */}
+            {/* <Route exact path="/app/library" element={<TemplatesLibrary />} /> */}
+          </Routes>
         </Paper>
       </Box>
     </Box>
   );
-};
+}
 
 Library.propTypes = {
   // filteredTalkTracks: array.isRequired, // eslint-disable-line
@@ -179,7 +159,6 @@ Library.propTypes = {
   // setElements: func.isRequired,
   // setTemplates: func.isRequired,
   // templates: array.isRequired, // eslint-disable-line
-  history: object, // eslint-disable-line
 };
 
 export default Library;

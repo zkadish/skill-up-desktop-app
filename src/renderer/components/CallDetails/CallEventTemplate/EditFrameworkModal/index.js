@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import EditFrameworkModal from './EditFrameworkModal';
 
@@ -29,7 +28,4 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withRouter(EditFrameworkModal));
+export default connect(mapStateToProps, mapDispatchToProps)(EditFrameworkModal);

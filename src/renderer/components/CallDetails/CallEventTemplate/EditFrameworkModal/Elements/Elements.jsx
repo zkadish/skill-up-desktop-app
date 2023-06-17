@@ -26,7 +26,7 @@ import { uuid } from '../../../../../utils/data';
 
 import classes from './Elements.styles';
 
-const Elements = (props) => {
+function Elements(props) {
   const {
     activeFrameworkBlock,
     activeFrameworkElement,
@@ -38,7 +38,7 @@ const Elements = (props) => {
     setFrameworkElementType,
     setAlert,
     setAlertDialog,
-    history,
+    setPath,
   } = props;
 
   const [newElementName, setNewElementName] = useState('');
@@ -56,7 +56,7 @@ const Elements = (props) => {
     );
 
     if (found) setActiveFrameworkElement(found);
-  }, [history.location.pathname]);
+  }, []);
 
   // set customInput values
   useEffect(() => {
@@ -253,7 +253,7 @@ const Elements = (props) => {
   const onClickEditBtn = (element) => (e) => {
     e.stopPropagation();
     setActiveFrameworkElement(element);
-    history.push('/app/frameworks/templates/blocks/elements/battle-card');
+    setPath('/elements/battle-card');
   };
 
   const onDelete = (element) => {
@@ -504,7 +504,8 @@ const Elements = (props) => {
           <MenuItem
             sx={{
               ...classes.menuItem,
-              ...(moreMenuElement.type === 'talk-track' && classes.menuItemActive),
+              ...(moreMenuElement.type === 'talk-track' &&
+                classes.menuItemActive),
             }}
             onClick={onClickMenuItem('talk-track')}
           >
@@ -519,7 +520,7 @@ const Elements = (props) => {
       </Box>
     </>
   );
-};
+}
 
 Elements.propTypes = {
   activeFrameworkBlock: object, // eslint-disable-line
@@ -532,7 +533,7 @@ Elements.propTypes = {
   setFrameworkElementName: func.isRequired,
   setAlert: func.isRequired,
   setAlertDialog: func.isRequired,
-  history: object.isRequired, // eslint-disable-line
+  setPath: func.isRequired, // eslint-disable-line
 };
 
 export default Elements;

@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import { func, object } from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Paper from '@mui/material/Paper';
@@ -18,7 +18,7 @@ import SaveCancel from './SaveCancel';
 
 import classes from './EditFrameworkModal.styles';
 
-const EditFrameworkModal = (props) => {
+function EditFrameworkModal(props) {
   const {
     activeCall,
     callEventModal,
@@ -26,13 +26,16 @@ const EditFrameworkModal = (props) => {
     setCallEventInitState,
     setCallEventModal,
     setFrameworkTemplate,
-    history,
   } = props;
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isDirty, setIsDirty] = useState(false);
+  const [path, setPath] = useState('/blocks');
 
   useEffect(() => {
-    history.push('/app/calls/templates/modal/blocks');
+    // console.log(location);
+    // debugger;
+    // navigate('/app/calls/templates/modal');
     setCallEventInitState(callEventModal.template);
   }, []);
 
@@ -44,7 +47,7 @@ const EditFrameworkModal = (props) => {
 
   const handleClose = () => {
     setCallEventModal({ open: false });
-    history.push('/app/calls/templates/modal/blocks');
+    // navigate('/app/calls/templates/modal/blocks');
   };
 
   const onCancel = () => {
@@ -58,50 +61,46 @@ const EditFrameworkModal = (props) => {
   const onSave = () => {
     setFrameworkTemplate(callEventModal.template, activeCall);
     setCallEventModal({ open: false });
-    history.push('/app/calls/templates/modal/blocks');
+    // navigate('/app/calls/templates/modal/blocks');
   };
 
   return (
-    <>
-      <Paper sx={{ ...classes.root }}>
-        <AppBar sx={{ ...classes.appBar }} position="static">
-          <Box sx={{ ...classes.breadCrumbs }}>
-            <BreadCrumbs />
-            <IconButton onClick={handleClose} size="large">
-              <CloseOutlinedIcon />
-            </IconButton>
-          </Box>
-        </AppBar>
-        <Box sx={{ ...classes.scrollContainer }}>
-          <Switch>
-            <Route
-              exact
-              path="/app/calls/templates/modal/blocks/battle-cards/battle-card"
-            >
-              <BattleCard />
-            </Route>
-            <Route exact path="/app/calls/templates/modal/blocks/battle-cards">
-              <BattleCards />
-            </Route>
-            <Route exact path="/app/calls/templates/modal/blocks/elements">
-              <Elements />
-            </Route>
-            <Route path="/app/calls/templates/modal/blocks">
-              <Blocks />
-            </Route>
-          </Switch>
+    <Paper sx={{ ...classes.root }}>
+      <AppBar sx={{ ...classes.appBar }} position="static">
+        <Box sx={{ ...classes.breadCrumbs }}>
+          <BreadCrumbs path={path} setPath={setPath} />
+          <IconButton onClick={handleClose} size="large">
+            <CloseOutlinedIcon />
+          </IconButton>
         </Box>
-        <SaveCancel onCancel={onCancel} isDirty={isDirty} onSave={onSave} />
-      </Paper>
-    </>
+      </AppBar>
+      <Box sx={{ ...classes.scrollContainer }}>
+        {path === '/blocks' && <Blocks setPath={setPath} />}
+        {path === '/blocks/elements' && <Elements setPath={setPath} />}
+        {path === '/blocks/battle-cards' && <BattleCards setPath={setPath} />}
+        {path === '/blocks/battle-cards/battle-card' && (
+          <BattleCard setPath={setPath} />
+        )}
+        {/* <Routes> */}
+        {/* <Route path="modal/blocks" element={<Blocks />} /> */}
+        {/* <Route path="modal" element={<Blocks />} />
+          <Route path="modal/blocks/elements" element={<Elements />} />
+          <Route path="modal/blocks/battle-cards" element={<BattleCards />} />
+          <Route
+            path="modal/blocks/battle-cards/battle-card"
+            element={<BattleCard />}
+          />
+        </Routes> */}
+      </Box>
+      <SaveCancel onCancel={onCancel} isDirty={isDirty} onSave={onSave} />
+    </Paper>
   );
-};
+}
 
 EditFrameworkModal.propTypes = {
   activeCall: object, // eslint-disable-line
   callEventModal: object, // eslint-disable-line
   callEventInitState: object, // eslint-disable-line
-  history: object, // eslint-disable-line
   setCallEventInitState: func.isRequired,
   setCallEventModal: func.isRequired,
   setFrameworkTemplate: func.isRequired,

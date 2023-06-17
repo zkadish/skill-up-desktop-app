@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 import TalkTracks from './TalkTracks';
 
 import {
@@ -40,11 +39,8 @@ function mapDispatchToProps(dispatch) {
       setAlert,
       setAlertDialog,
     },
-    dispatch,
+    dispatch
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withRouter(TalkTracks));
+export default connect(mapStateToProps, mapDispatchToProps)(TalkTracks);

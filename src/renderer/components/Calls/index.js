@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { setActiveCall } from '../../actions/app';
 import { setEventNotification } from '../../actions/notifications';
@@ -24,4 +23,4 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Calls));
+export default connect(mapStateToProps, mapDispatchToProps)(Calls);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,7 +17,7 @@ import VideoPlatformSettings from './VideoPlatformSettings';
 
 import classes from './AppSettings.styles';
 
-const AppSettings = () => {
+function AppSettings() {
   return (
     <Box sx={{ ...classes.root }}>
       <Box className="settingsMenu">
@@ -137,41 +137,42 @@ const AppSettings = () => {
         </Paper>
         <Paper sx={{ ...classes.calls }}>
           <Paper sx={{ ...classes.paper }}>
-            <Switch>
-              <Route path={routes.VIDEO_PLATFORM_SETTINGS}>
-                <VideoPlatformSettings />
-              </Route>
-              <Route path={routes.CRM_SETTINGS}>
-                <CrmSettings />
-              </Route>
-              <Route path={routes.CALENDAR_SETTINGS}>
-                <CalendarSettings />
-              </Route>
-              <Route path={routes.BILLING_SETTINGS}>
-                <BillingSettings />
-              </Route>
-              <Route path={routes.ADMIN_SETTINGS}>
-                <AdminSettings />
-              </Route>
-              <Route path={routes.COMPANY_SETTINGS}>
-                <CompanySettings />
-              </Route>
-              <Route path={routes.SALES_COACH_SETTINGS}>
-                <SalesCoachSettings />
-              </Route>
-              <Route path={routes.PASSWORD_SETTINGS}>
-                <PasswordSettings />
-              </Route>
-              <Route path={[routes.APP_SETTINGS, routes.USER_SETTINGS]}>
-                <UserSettings />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route
+                path={routes.VIDEO_PLATFORM_SETTINGS}
+                element={<VideoPlatformSettings />}
+              />
+              <Route path={routes.CRM_SETTINGS} element={<CrmSettings />} />
+              <Route
+                path={routes.CALENDAR_SETTINGS}
+                element={<CalendarSettings />}
+              />
+              <Route
+                path={routes.BILLING_SETTINGS}
+                element={<BillingSettings />}
+              />
+              <Route path={routes.ADMIN_SETTINGS} element={<AdminSettings />} />
+              <Route
+                path={routes.COMPANY_SETTINGS}
+                element={<CompanySettings />}
+              />
+              <Route
+                path={routes.SALES_COACH_SETTINGS}
+                element={<SalesCoachSettings />}
+              />
+              <Route
+                path={routes.PASSWORD_SETTINGS}
+                element={<PasswordSettings />}
+              />
+              <Route path={routes.APP_SETTINGS} element={<UserSettings />} />
+              <Route path={routes.USER_SETTINGS} element={<UserSettings />} />
+            </Routes>
             {/* <SaveCancel /> */}
           </Paper>
         </Paper>
       </Box>
     </Box>
   );
-};
+}
 
 export default AppSettings;

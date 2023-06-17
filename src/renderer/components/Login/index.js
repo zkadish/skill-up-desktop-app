@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { setAuthenticatedUser, setAccessToken } from '../../actions/auth';
 import {
@@ -29,4 +28,4 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(Login));
+export default connect(null, mapDispatchToProps)(Login);

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 import TalkTrackLibrary from './TalkTrackLibrary';
 
 import {
@@ -17,7 +16,7 @@ import {
 } from '../../../actions/builder';
 import { setAlert, setAlertDialog } from '../../../actions/notifications';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     activeLibraryTalkTrack: state.builder.activeLibraryTalkTrack,
     activeTemplate: state.builder.activeTemplate,
@@ -45,11 +44,8 @@ function mapDispatchToProps(dispatch) {
       setAlert,
       setAlertDialog,
     },
-    dispatch,
+    dispatch
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withRouter(TalkTrackLibrary));
+export default connect(mapStateToProps, mapDispatchToProps)(TalkTrackLibrary);

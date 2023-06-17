@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 
 import CallEventTemplate from './CallEventTemplate';
 
@@ -43,7 +42,4 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(CallEventTemplate));
+export default connect(mapStateToProps, mapDispatchToProps)(CallEventTemplate);
